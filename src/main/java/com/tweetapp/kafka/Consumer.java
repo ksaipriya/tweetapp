@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class Consumer {
 
-    private final Logger logger = LoggerFactory.getLogger(Producer.class);
+    private final Logger logger = LoggerFactory.getLogger(Consumer.class);
 
     @KafkaListener(topics = "tweetapp", groupId = "group_id")
-    public void consume(String message) throws IOException {
+    public void consume(String message){
         logger.info(String.format("#### -> Consumed message -> %s", message));
     }
 }
