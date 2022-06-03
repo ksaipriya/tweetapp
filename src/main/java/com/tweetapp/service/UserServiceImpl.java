@@ -116,8 +116,7 @@ public class UserServiceImpl implements UserService{
     // all tweets of particular user
     @Override
     public List<Tweet> getAllTweetsOfUser(String username) {
-        List<Tweet> newTweet = tweetRepo.getTweetsByUsername(username);
-        return newTweet;
+        return tweetRepo.getTweetsByUsername(username);
     }
 
     //logged in user can update tweet by providing the content
@@ -133,14 +132,13 @@ public class UserServiceImpl implements UserService{
     @Override
     public String deleteTweet(String id) {
         Tweet deleteTweet = tweetRepo.findTweetById(id);
-        String ret_str;
+
         if(deleteTweet!=null){
             tweetRepo.deleteById(id);
-            ret_str = "deleted tweet with id "+id;
+            return "deleted tweet with id "+id;
         }
         else
-            ret_str = "no tweet found with id "+id;
-        return ret_str;
+            return "no tweet found with id "+id;
     }
 
     // tweet id & username as input -> like status is updated
@@ -182,8 +180,7 @@ public class UserServiceImpl implements UserService{
     // returns user specific to the id
     @Override
     public User findByUserId(String userId) {
-        User userById = new User();
-        userById = userRepo.findUserByUserId(userId);
+        User userById = userRepo.findUserByUserId(userId);
         if(userById!=null)
             return userById;
         return null;
